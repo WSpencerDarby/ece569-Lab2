@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur3e_on_table">
+
+    <!-- Universal Robots macro -->
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
+
+    <!-- Table -->
+    <xacro:include filename="materials.xacro" />
+    <xacro:include filename="table_macro.xacro" />
+
+    <link name="world" />
+
+    <xacro:table prefix="table_" parent="world">
+        <origin xyz="0 0 1" rpy="0 0 0" />
+    </xacro:table>
+
+    <!-- UR3e -->
+    <xacro:ur_robot
+        name="ur3e"
+        tf_prefix=""
+        parent="table_top"
+        joint_limits_parameters_file="$(find ur_description)/config/ur3e/joint_limits.yaml"
+        kinematics_parameters_file="$(find ur_description)/config/ur3e/default_kinematics.yaml"
+        physical_parameters_file="$(find ur_description)/config/ur3e/physical_parameters.yaml"
+        visual_parameters_file="$(find ur_description)/config/ur3e/visual_parameters.yaml"
+        ur_type="ur3e">
+
+        <origin xyz="0 0 0" rpy="0 0 0" />
+
+    </xacro:ur_robot>
+
+</robot>
